@@ -261,10 +261,10 @@ dev.off()
 
 ```
 #Introduction  
-Who is the best player on the Warriors? Is it KD or Steph? Is Draymond garbage? Is Iggy past his prime? In this article, we will take a look at the shooting percentages and shot selections of the Warriors to try to come to a conclusive ranking of the key players. Along the way, we will also take a look at the stylistic differences between key players.
+Who is the best player on the Warriors? Is it KD or Steph? Is Draymond garbage? Is Iggy past his prime? Does Klay talk to his dog too much? In this article, we will take a look at the shooting percentages and shot selections of the Warriors to try to come to a conclusive ranking of the key players. Along the way, we will also take a look at the stylistic differences between key players.
 
 #Motivation
-While the Warriors are very good, they do not all play with the same style or even ability. Just by watching footage, it's clear that not everyone on the team is as good of a shooter as Steph or KD. Yet some more nuanced observations can be mad
+While the Warriors are very good, they do not all play with the same style or even ability. Just by watching footage, it's clear that not everyone on the team is as good of a shooter as Steph or KD. Yet some more nuanced observations can be made about the types of shots being made between the players. For instance, Iggy and Draymond are clearly not as good as the other members of the team at scoring, but how do they compare to each other. At face value they both seem like similar players: offensive slashers with limted shooting capabilities. We will have to try and discern between them. And where does Klay fit into all of this? Can the stats help him make a suprise leapfrog over the two clear frontrunners in KD and Steph? Or does he have his own flaws that push him below the other two front court members?
 
 
 #Data
