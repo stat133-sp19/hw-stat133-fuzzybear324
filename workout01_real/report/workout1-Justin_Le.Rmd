@@ -4,18 +4,21 @@ author: "Justin Le"
 output: github_document
 ---
 
-```{r, message = F, warning = F}
+```{r, message = F, warning = F, echo = FALSE}
 library(readr)
 library(dplyr)
-
+library(ggplot2)
+library(grid)
+library(jpeg)
+library(readr)
 ```
 
-```{r, message = F, warning = F, echo = F}
+```{r, message = F, warning = F, echo = F, results ='hide'}
 setwd("..")
 shot_data <- read_csv("data/shots-data.csv")
 ```
 
-```{r , message = F, warning = F, echo = F}
+```{r , message = F, warning = F, echo = F, results ='hide'}
 #2pt effective shooting % by Player
 curry_2pt_total <- nrow(shot_data[shot_data$name == "Steph Curry" & shot_data$shot_type == "2PT Field Goal",])
 curry_2pt_made <- nrow(shot_data[shot_data$name == "Steph Curry" & shot_data$shot_type == "2PT Field Goal" & shot_data$shot_made_flag == "shot_yes",])
@@ -43,7 +46,7 @@ table_2pt <- arrange(table_2pt, desc(table_2pt$Perc_Made))
 
 ```
 
-```{r, message = F, warning = F, echo = F}
+```{r, message = F, warning = F, echo = F, results ='hide'}
 #3pt effective shooting % by Player
 curry_3pt_total <- nrow(shot_data[shot_data$name == "Steph Curry" & shot_data$shot_type == "3PT Field Goal",])
 curry_3pt_made <- nrow(shot_data[shot_data$name == "Steph Curry" & shot_data$shot_type == "3PT Field Goal" & shot_data$shot_made_flag == "shot_yes",])
@@ -71,7 +74,7 @@ table_3pt <- arrange(table_3pt, desc(table_3pt$Perc_Made))
 
 ```
 
-```{r, message = F, warning = F, echo = F}
+```{r, message = F, warning = F, echo = F, results ='hide'}
 #Effective Shooting & by Player
 curry_total <- nrow(shot_data[shot_data$name == "Steph Curry",])
 curry_made <- nrow(shot_data[shot_data$name == "Steph Curry" & shot_data$shot_made_flag == "shot_yes",])
@@ -97,13 +100,209 @@ table_overall <- data.frame("Name" = c("Steph Curry", "Draymond Green","Kevin Du
 table_overall$Perc_Made <- table_overall$Perc_Made*100
 table_overall <- arrange(table_overall, desc(table_overall$Perc_Made))
 
+```
+
+```{r, message = F, warning = F, echo = F, results ='hide'}
+setwd("..")
+curry <- read.csv("data/stephen-curry.csv", stringsAsFactors = FALSE)
+klay <- read.csv("data/klay-thompson.csv", stringsAsFactors = FALSE)
+durant <- read.csv("data/kevin-durant.csv", stringsAsFactors = FALSE)
+draymond <- read.csv("data/draymond-green.csv", stringsAsFactors = FALSE)
+iguodala <- read.csv("data/andre-iguodala.csv", stringsAsFactors = FALSE)
+
+#adding name column
+curry$name <- c("Steph Curry")
+klay$name <- c("Klay Thompson")
+durant$name <- c("Kevin Durant")
+draymond$name <- c("Draymond Green")
+iguodala$name <- c("Andre Iguodala")
+
+#changing shot made values to be more descriptive
+curry$shot_made_flag[curry$shot_made_flag == "n"] <- "shot_no"
+curry$shot_made_flag[curry$shot_made_flag == "y"] <- "shot_yes"
+
+klay$shot_made_flag[klay$shot_made_flag == "n"] <- "shot_no"
+klay$shot_made_flag[klay$shot_made_flag == "y"] <- "shot_yes"
+
+durant$shot_made_flag[durant$shot_made_flag == "n"] <- "shot_no"
+durant$shot_made_flag[durant$shot_made_flag == "y"] <- "shot_yes"
+
+draymond$shot_made_flag[draymond$shot_made_flag == "n"] <- "shot_no"
+draymond$shot_made_flag[draymond$shot_made_flag == "y"] <- "shot_yes"
+
+iguodala$shot_made_flag[iguodala$shot_made_flag == "n"] <- "shot_no"
+iguodala$shot_made_flag[iguodala$shot_made_flag == "y"] <- "shot_yes"
+
+#Adding column minutes
+curry$minute <- (12*curry$period)-curry$minutes_remaining
+klay$minute <- (12*klay$period)-klay$minutes_remaining
+durant$minute <- (12*durant$period)-durant$minutes_remaining
+draymond$minute <- (12*draymond$period)-draymond$minutes_remaining
+iguodala$minute <- (12*iguodala$period)-iguodala$minutes_remaining
+
+#Sinking files to output folder
+sink("output/steph-curry-summary.txt")
+summary(curry)
+sink()
+
+sink("output/klay-thompson-summary.txt")
+summary(klay)
+sink()
+
+sink("output/kevin-durant-summary.txt")
+summary(durant)
+sink()
+
+sink("output/draymond-green-summary.txt")
+summary(draymond)
+sink()
+
+sink("output/andre-iguodala-summary.txt")
+summary(iguodala)
+sink()
+
+#binding and exporting the tables
+shot_data <- rbind(curry, klay, durant, draymond, iguodala)
+write.csv(shot_data, file = "data/shots-data.csv")
+
+#sinking the summary of the big table
+sink("output/shot_data-summary.txt")
+summary(shot_data)
+sink()
 
 ```
 
-#Introduction  
-With the amassing of numerous stars on the Golden State Roster, the natural question to ask is who is the best offensive player? In this article, we will look at the shoot percentages of the main players on Golden State, and try to sort them by offensive ability. It will be important to tak into consideration the Warrior's historic reliance and skill of shooting the three ball, with the inclusion of Kevin Durant's lethality from the midrange. test writng
+```{r, message = F, warning = F, echo = F, results ='hide'}
+setwd("..")
+court_file <- "images/nba-court.jpg"
 
-# new section
+court_image <- rasterGrob(
+  readJPEG(court_file),
+  width = unit(1, "npc"),
+  height = unit(1, "npc")
+)
+
+klay_scatterplot <- ggplot(data = klay) +
+  annotation_custom(court_image, -250, 250, -50, 420) +
+  geom_point(aes(x = x, y = y, color = shot_made_flag)) +
+  ylim(-50,420) +
+  ggtitle('Shot Chart: Klay Thompson (2016) ') +
+  theme_minimal()
+
+pdf(file = "images/klay-thompson-shot-chart.pdf", width = 6.5, height = 5)
+klay_scatterplot
+dev.off()
+
+
+andre_scatterplot <- ggplot(data = iguodala) +
+  annotation_custom(court_image, -250, 250, -50, 420) +
+  geom_point(aes(x = x, y = y, color = shot_made_flag)) +
+  ylim(-50,420) +
+  ggtitle('Shot Chart: Andre Iguodala (2016) ') +
+  theme_minimal()
+
+pdf(file = "images/andre-iguodala-shot-chart.pdf", width = 6.5, height = 5)
+andre_scatterplot
+dev.off()
+
+
+draymond_scatterplot <- ggplot(data = draymond) +
+  annotation_custom(court_image, -250, 250, -50, 420) +
+  geom_point(aes(x = x, y = y, color = shot_made_flag)) +
+  ylim(-50,420) +
+  ggtitle('Shot Chart: Draymond Green (2016) ') +
+  theme_minimal()
+
+pdf(file = "images/draymond-green-shot-chart.pdf", width = 6.5, height = 5)
+draymond_scatterplot
+dev.off()
+
+
+kevin_scatterplot <- ggplot(data = durant) +
+  annotation_custom(court_image, -250, 250, -50, 420) +
+  geom_point(aes(x = x, y = y, color = shot_made_flag)) +
+  ylim(-50,420) +
+  ggtitle('Shot Chart: Kevin Durant (2016) ') +
+  theme_minimal()
+
+pdf(file = "images/kevin-durant-shot-chart.pdf", width = 6.5, height = 5)
+kevin_scatterplot
+dev.off()
+
+
+steph_scatterplot <- ggplot(data = curry) +
+  annotation_custom(court_image, -250, 250, -50, 420) +
+  geom_point(aes(x = x, y = y, color = shot_made_flag)) +
+  ylim(-50,420) +
+  ggtitle('Shot Chart: Steph Curry (2016) ') +
+  theme_minimal()
+
+pdf(file = "images/steph-curry-shot-chart.pdf", width = 6.5, height = 5)
+steph_scatterplot
+dev.off()
+
+# Faceting
+shots_data <- read_csv("data/shots-data.csv")
+all_players <- ggplot(data = shot_data) +
+  annotation_custom(court_image, -250, 250, -50, 420) +
+  geom_point(aes(x = x, y = y, color = shot_made_flag)) +
+  ylim(-50,420) +
+  ggtitle('Shot Chart: GSW (2016 season) ') +
+  facet_wrap(~ name) +
+  theme_minimal()
+
+pdf(file = "images/gsw-shot-charts.pdf", width = 8, height = 7)
+all_players
+dev.off()
+
+png(file = "images/gsw-shot-charts.png", width = 8, height = 7)
+all_players
+dev.off()
+
+```
+#Introduction  
+With the amassing of numerous stars on the Golden State Roster, the natural question to ask is who is the best offensive player? In this article, we will look at the different shooting percentages of the main players on Golden State, and try to sort them by offensive ability. It will be important to take into consideration the Warrior's historic reliance and skill of shooting the three ball, with the added inclusion of Kevin Durant's lethality from the midrange. 
+
+#Background
+
+
+
+#Data
+Let's take a look at the shooting percentages, going by whether the shots taken were two pointers, three pointers, and then both combined.
+
+First let's look at just the 2pt shots.
+
+```{r, echo = FALSE}
+table_2pt
+```
+
+Interestingly, Andre Iguodala has the highest percentage, but that's a bit miselading as he has the fewest shot attempts. Kevin Durant impresses here with not only the most shot attempts but also the second highest percentage.
+
+Now looking at the 3 pointers.
+
+```{r, echo = FALSE}
+table_3pt
+```
+
+The splash brothers are the far and away the best shooters from here, top 2 in both volume and accuracy. Klay has the highest percentage, but Steph beats him in attempts by over 100. 
+
+Combining both 2 point and 3 point attempts now:
+```{r, echo = FALSE}
+table_overall
+```
+
+
+And now let's look at the shot charts of the players. 
+
+```{r, echo = FALSE, warning = FALSE}
+all_players
+```
+
+#Analsysis
+
+#Conclusions
+
+
 
 
 

@@ -77,8 +77,8 @@ dev.off()
 
 # Faceting
 
-shots_data <- read_csv("~/Berkeley/Spring 2019/Stat 133/workout01/data/shots-data.csv")
-all_players <- ggplot(data = shots_data) +
+shots_data <- read_csv("~/Berkeley/Spring 2019/Stat 133/workout01_real/data/shots-data.csv")
+all_players <- ggplot(data = shot_data) +
   annotation_custom(court_image, -250, 250, -50, 420) +
   geom_point(aes(x = x, y = y, color = shot_made_flag)) +
   ylim(-50,420) +

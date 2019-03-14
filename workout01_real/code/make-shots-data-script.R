@@ -4,7 +4,9 @@
 #outputs: summary text files for individual players and all players
 
 #reading in data from local reposistory
-setwd("Berkeley/Spring 2019/Stat 133/workout01")
+
+#setwd("..")
+#getwd()
 
 curry <- read.csv("data/stephen-curry.csv", stringsAsFactors = FALSE)
 klay <- read.csv("data/klay-thompson.csv", stringsAsFactors = FALSE)
