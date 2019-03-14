@@ -261,10 +261,10 @@ dev.off()
 
 ```
 #Introduction  
-With the amassing of numerous stars on the Golden State Roster, the natural question to ask is who is the best offensive player? In this article, we will look at the different shooting percentages of the main players on Golden State, and try to sort them by offensive ability. It will be important to take into consideration the Warrior's historic reliance and skill of shooting the three ball, with the added inclusion of Kevin Durant's lethality from the midrange. 
+Who is the best player on the Warriors? Is it KD or Steph? Is Draymond garbage? Is Iggy past his prime? In this article, we will take a look at the shooting percentages and shot selections of the Warriors to try to come to a conclusive ranking of the key players. Along the way, we will also take a look at the stylistic differences between key players.
 
-#Background
-
+#Motivation
+While the Warriors are very good, they do not all play with the same style or even ability. Just by watching footage, it's clear that not everyone on the team is as good of a shooter as Steph or KD. Yet some more nuanced observations can be mad
 
 
 #Data
@@ -291,6 +291,7 @@ Combining both 2 point and 3 point attempts now:
 table_overall
 ```
 
+Kevin Durant again takes the throne at the top of the charts, with a whopping 54% shooting percentage and being the third highest in attempts.Suprisingly, Steph is second to last here. It is also intersting to note that Draymond is at the bottom of the standings among all three scenarios.
 
 And now let's look at the shot charts of the players. 
 
@@ -298,9 +299,23 @@ And now let's look at the shot charts of the players.
 all_players
 ```
 
+While a bit hard to make definitive statements from these charts, the key takeaway is that only Durant, Klay, and Steph take a considerable amount of midrange shots. Additionally, Step Curry has a noticeable pull up on his shot chart, indicating that he takes shots from further back than the other players. 
+
 #Analsysis
 
+Steph's overwhelming advantage at shooting the 3 ball edges him over Durant.Draymond loses out to Iguodala because of his horrendous shooting at considerable volume. Iguodala at least understands he is playing with better players and thus limits his shots. Despite being suprisingly efficient at times, his lack of volume puts him below Klay.
+
 #Conclusions
+
+Based off the data and anlsyis we have seen, the rankings of the GSW players would have to be:
+
+1. Steph Curry
+2. Kevin Durant
+3. Klay Thompson
+4. Andre Iguodala
+5. Draymond Green
+
+
 
 
 
