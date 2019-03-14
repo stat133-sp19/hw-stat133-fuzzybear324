@@ -1,0 +1,111 @@
+---
+title: "Workout 1"
+author: "Justin Le"
+output: github_document
+---
+
+```{r, message = F, warning = F}
+library(readr)
+library(dplyr)
+
+```
+
+```{r, message = F, warning = F, echo = F}
+setwd("..")
+shot_data <- read_csv("data/shots-data.csv")
+```
+
+```{r , message = F, warning = F, echo = F}
+#2pt effective shooting % by Player
+curry_2pt_total <- nrow(shot_data[shot_data$name == "Steph Curry" & shot_data$shot_type == "2PT Field Goal",])
+curry_2pt_made <- nrow(shot_data[shot_data$name == "Steph Curry" & shot_data$shot_type == "2PT Field Goal" & shot_data$shot_made_flag == "shot_yes",])
+curry_2pt_percent <- curry_2pt_made/curry_2pt_total
+
+draymond_2pt_total <- nrow(shot_data[shot_data$name == "Draymond Green" & shot_data$shot_type == "2PT Field Goal",])
+draymond_2pt_made <- nrow(shot_data[shot_data$name == "Draymond Green" & shot_data$shot_type == "2PT Field Goal" & shot_data$shot_made_flag == "shot_yes",])
+draymond_2pt_percent <- draymond_2pt_made/draymond_2pt_total
+
+durant_2pt_total <- nrow(shot_data[shot_data$name == "Kevin Durant" & shot_data$shot_type == "2PT Field Goal",])
+durant_2pt_made <- nrow(shot_data[shot_data$name == "Kevin Durant" & shot_data$shot_type == "2PT Field Goal" & shot_data$shot_made_flag == "shot_yes",])
+durant_2pt_percent <- durant_2pt_made/durant_2pt_total
+
+iguodala_2pt_total <- nrow(shot_data[shot_data$name == "Andre Iguodala" & shot_data$shot_type == "2PT Field Goal",])
+iguodala_2pt_made <- nrow(shot_data[shot_data$name == "Andre Iguodala" & shot_data$shot_type == "2PT Field Goal" & shot_data$shot_made_flag == "shot_yes",])
+iguodala_2pt_percent <- iguodala_2pt_made/iguodala_2pt_total
+
+klay_2pt_total <- nrow(shot_data[shot_data$name == "Klay Thompson" & shot_data$shot_type == "2PT Field Goal",])
+klay_2pt_made <- nrow(shot_data[shot_data$name == "Klay Thompson" & shot_data$shot_type == "2PT Field Goal" & shot_data$shot_made_flag == "shot_yes",])
+klay_2pt_percent <- klay_2pt_made/klay_2pt_total
+
+table_2pt <- data.frame("Name" = c("Steph Curry", "Draymond Green","Kevin Durant", "Andre Iguodala", "Klay Thompson"), "Total" = c(curry_2pt_total, draymond_2pt_total, durant_2pt_total, iguodala_2pt_total, klay_2pt_total), "Made" = c(curry_2pt_made, draymond_2pt_made, durant_2pt_made, iguodala_2pt_made, klay_2pt_made), "Perc_Made" = c(curry_2pt_percent, draymond_2pt_percent, durant_2pt_percent, iguodala_2pt_percent, klay_2pt_percent))
+table_2pt$Perc_Made <- table_2pt$Perc_Made*100
+table_2pt <- arrange(table_2pt, desc(table_2pt$Perc_Made))
+
+```
+
+```{r, message = F, warning = F, echo = F}
+#3pt effective shooting % by Player
+curry_3pt_total <- nrow(shot_data[shot_data$name == "Steph Curry" & shot_data$shot_type == "3PT Field Goal",])
+curry_3pt_made <- nrow(shot_data[shot_data$name == "Steph Curry" & shot_data$shot_type == "3PT Field Goal" & shot_data$shot_made_flag == "shot_yes",])
+curry_3pt_percent <- curry_3pt_made/curry_3pt_total
+
+draymond_3pt_total <- nrow(shot_data[shot_data$name == "Draymond Green" & shot_data$shot_type == "3PT Field Goal",])
+draymond_3pt_made <- nrow(shot_data[shot_data$name == "Draymond Green" & shot_data$shot_type == "3PT Field Goal" & shot_data$shot_made_flag == "shot_yes",])
+draymond_3pt_percent <- draymond_3pt_made/draymond_3pt_total
+
+durant_3pt_total <- nrow(shot_data[shot_data$name == "Kevin Durant" & shot_data$shot_type == "3PT Field Goal",])
+durant_3pt_made <- nrow(shot_data[shot_data$name == "Kevin Durant" & shot_data$shot_type == "3PT Field Goal" & shot_data$shot_made_flag == "shot_yes",])
+durant_3pt_percent <- durant_3pt_made/durant_3pt_total
+
+iguodala_3pt_total <- nrow(shot_data[shot_data$name == "Andre Iguodala" & shot_data$shot_type == "3PT Field Goal",])
+iguodala_3pt_made <- nrow(shot_data[shot_data$name == "Andre Iguodala" & shot_data$shot_type == "3PT Field Goal" & shot_data$shot_made_flag == "shot_yes",])
+iguodala_3pt_percent <- iguodala_3pt_made/iguodala_3pt_total
+
+klay_3pt_total <- nrow(shot_data[shot_data$name == "Klay Thompson" & shot_data$shot_type == "3PT Field Goal",])
+klay_3pt_made <- nrow(shot_data[shot_data$name == "Klay Thompson" & shot_data$shot_type == "3PT Field Goal" & shot_data$shot_made_flag == "shot_yes",])
+klay_3pt_percent <- klay_3pt_made/klay_3pt_total
+
+table_3pt <- data.frame("Name" = c("Steph Curry", "Draymond Green","Kevin Durant", "Andre Iguodala", "Klay Thompson"), "Total" = c(curry_3pt_total, draymond_3pt_total, durant_3pt_total, iguodala_3pt_total, klay_3pt_total), "Made" = c(curry_3pt_made, draymond_3pt_made, durant_3pt_made, iguodala_3pt_made, klay_3pt_made), "Perc_Made" = c(curry_3pt_percent, draymond_3pt_percent, durant_3pt_percent, iguodala_3pt_percent, klay_3pt_percent))
+table_3pt$Perc_Made <- table_3pt$Perc_Made*100
+table_3pt <- arrange(table_3pt, desc(table_3pt$Perc_Made))
+
+```
+
+```{r, message = F, warning = F, echo = F}
+#Effective Shooting & by Player
+curry_total <- nrow(shot_data[shot_data$name == "Steph Curry",])
+curry_made <- nrow(shot_data[shot_data$name == "Steph Curry" & shot_data$shot_made_flag == "shot_yes",])
+curry_percent <- curry_made/curry_total
+
+draymond_total <- nrow(shot_data[shot_data$name == "Draymond Green" ,])
+draymond_made <- nrow(shot_data[shot_data$name == "Draymond Green"  & shot_data$shot_made_flag == "shot_yes",])
+draymond_percent <- draymond_made/draymond_total
+
+durant_total <- nrow(shot_data[shot_data$name == "Kevin Durant" ,])
+durant_made <- nrow(shot_data[shot_data$name == "Kevin Durant"  & shot_data$shot_made_flag == "shot_yes",])
+durant_percent <- durant_made/durant_total
+
+iguodala_total <- nrow(shot_data[shot_data$name == "Andre Iguodala" ,])
+iguodala_made <- nrow(shot_data[shot_data$name == "Andre Iguodala"  & shot_data$shot_made_flag == "shot_yes",])
+iguodala_percent <- iguodala_made/iguodala_total
+
+klay_total <- nrow(shot_data[shot_data$name == "Klay Thompson" ,])
+klay_made <- nrow(shot_data[shot_data$name == "Klay Thompson"  & shot_data$shot_made_flag == "shot_yes",])
+klay_percent <- klay_made/klay_total
+
+table_overall <- data.frame("Name" = c("Steph Curry", "Draymond Green","Kevin Durant", "Andre Iguodala", "Klay Thompson"), "Total" = c(curry_total, draymond_total, durant_total, iguodala_total, klay_total), "Made" = c(curry_made, draymond_made, durant_made, iguodala_made, klay_made), "Perc_Made" = c(curry_percent, draymond_percent, durant_percent, iguodala_percent, klay_percent))
+table_overall$Perc_Made <- table_overall$Perc_Made*100
+table_overall <- arrange(table_overall, desc(table_overall$Perc_Made))
+
+
+```
+
+#Introduction  
+With the amassing of numerous stars on the Golden State Roster, the natural question to ask is who is the best offensive player? In this article, we will look at the shoot percentages of the main players on Golden State, and try to sort them by offensive ability. It will be important to tak into consideration the Warrior's historic reliance and skill of shooting the three ball, with the inclusion of Kevin Durant's lethality from the midrange. 
+
+
+
+
+
+
+
