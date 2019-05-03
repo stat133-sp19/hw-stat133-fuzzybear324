@@ -3,6 +3,20 @@ title: "README"
 output: html_document
 ---
 
-##Overview
+## Overview
 "binomial" is a minimal package that simulates information about multiple coin tosses each with the same probability. It also can make some graphs.
 
+## Usage
+You got 2 main choices: You can either make graphs or you can look at summary statistics.
+To make graphs, use either bin_distribution or bin_cumulative to make the object you want. Then plot the object to get your graph.
+To get statistics, use bin_variable and then call the ojbect to get information on the object.
+
+```{r}
+bin_cumt <- bin_cumulative(trials = 5, prob = 0.5)
+plot(bin_cumt)
+```
+
+```{r}
+bin_variable(trials = 5, prob = 0.5)
+bin_variable
+```
