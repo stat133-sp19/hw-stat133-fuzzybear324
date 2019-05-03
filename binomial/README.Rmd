@@ -6,6 +6,10 @@ output: html_document
 ## Overview
 "binomial" is a minimal package that simulates information about multiple coin tosses each with the same probability. It also can make some graphs.
 
+## Installing
+install.packages("devtools") 
+devtools::install_github("stat133-sp19/hw-stat133-fuzzybear324/binomial")
+
 ## Usage
 You got 2 main choices: You can either make graphs or you can look at summary statistics.
 To make graphs, use either bin_distribution or bin_cumulative to make the object you want. Then plot the object to get your graph.

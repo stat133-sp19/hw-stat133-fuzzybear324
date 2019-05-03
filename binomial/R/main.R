@@ -156,7 +156,7 @@ bin_skewness <- function(trials, prob){
 }
 bin_kurtosis <- function(trials, prob){
   check_trials(trials)
-  check_prob(prob)\
+  check_prob(prob)
   aux_kurtosis(trials, prob)
 }
 
