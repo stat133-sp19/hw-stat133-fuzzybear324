@@ -13,8 +13,8 @@ bin_choose <- function(n, k) {
   return(combinations)
 }
 
-source("Berkeley/Spring 2019/Stat 133/hw-stat133/binomial/R/auxillary.R")
-source("Berkeley/Spring 2019/Stat 133/hw-stat133/binomial/R/checkers.R")
+#source("Berkeley/Spring 2019/Stat 133/hw-stat133/binomial/R/auxillary.R")
+#source("Berkeley/Spring 2019/Stat 133/hw-stat133/binomial/R/checkers.R")
 
 #' @title bin probability
 #' @description Calculates the probability in which successes can occur in a given number trials given probability of a single success
