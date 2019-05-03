@@ -1,0 +1,49 @@
+---
+title: "Getting started with binomial"
+author: "Justin Le"
+output: html_document
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+library(binomial)
+```
+
+## Binomial
+The package binomial returns the probability of getting a certain number of heads with a given number of trials. It also does some visualization with plots.
+
+## Creating a bin variable
+First create a bin variable that you can draw information from:
+
+```{r}
+bin_variable(trials = 5, prob = 0.5)
+bin_variable
+```
+You can set the number of trials and the prob yourself. 
+Running the bin_variable object gives information about the variable.
+
+## Getting Probabilities
+To get probability of getting a certain number of successes, use bin_choose to determine the combinations the tosses can take.
+
+```{r}
+bin_probability(success = 3, trials = 5, prob = 0.5)
+
+```
+
+## Getting plots
+To create a histogram of a distribution, first create a distribtion object.
+```{r}
+bin_dist <- bin_distribution(trials = 5, prob = 0.5)
+```
+Then plot the object.
+
+```{r}
+plot(bin_dist)
+```
+
+You can do something similar to get cumulative graphs.
+
+```{r}
+bin_cumt <- bin_cumulative(trials = 5, prob = 0.5)
+plot(bin_cumt)
+```

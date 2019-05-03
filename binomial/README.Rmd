@@ -1,0 +1,8 @@
+---
+title: "README"
+output: html_document
+---
+
+##Overview
+"binomial" is a minimal package that simulates information about multiple coin tosses each with the same probability. It also can make some graphs.
+
